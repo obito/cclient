@@ -10,15 +10,6 @@ import (
 )
 
 func NewClient(clientHello utls.ClientHelloID, enableJar bool, proxyUrl ...string) (http.Client, error) {
-	var jar http.CookieJar
-	var err error
-
-	if enableJar {
-		jar, err = cookiejar.New(nil)
-		if err != nil {
-			return http.Client{}, err
-		}
-	}
 
 	if len(proxyUrl) > 0 && len(proxyUrl) > 0 {
 		dialer, err := newConnectDialer(proxyUrl[0])
@@ -26,14 +17,37 @@ func NewClient(clientHello utls.ClientHelloID, enableJar bool, proxyUrl ...strin
 			return http.Client{}, err
 		}
 
+		if enableJar {
+			jar, err := cookiejar.New(nil)
+			if err != nil {
+				return http.Client{}, err
+			}
+
+			return http.Client{
+				Transport: newRoundTripper(clientHello, dialer),
+				Jar:       jar,
+			}, nil
+		}
+
 		return http.Client{
 			Transport: newRoundTripper(clientHello, dialer),
-			Jar:       jar,
 		}, nil
 	} else {
+
+		if enableJar {
+			jar, err := cookiejar.New(nil)
+			if err != nil {
+				return http.Client{}, err
+			}
+
+			return http.Client{
+				Transport: newRoundTripper(clientHello, proxy.Direct),
+				Jar:       jar,
+			}, nil
+		}
+
 		return http.Client{
 			Transport: newRoundTripper(clientHello, proxy.Direct),
-			Jar:       jar,
 		}, nil
 	}
 }

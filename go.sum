@@ -1,5 +1,7 @@
 github.com/refraction-networking/utls v0.0.0-20200806014556-219d12d0a4a1 h1:fDLVuy6boqMtipYECxoKYypryf5wNPzhLhkGO+VMl6k=
 github.com/refraction-networking/utls v0.0.0-20200806014556-219d12d0a4a1/go.mod h1:tz9gX959MEFfFN5whTIocCLUG57WiILqtdVxI8c6Wj0=
+github.com/x04/cclient v0.0.0-20201021191927-d653321f9ecb h1:VL+PWFCeRuocfRk2WQJa/hYJdaYBBIrlUvlU6ZRCDBY=
+github.com/x04/cclient v0.0.0-20201021191927-d653321f9ecb/go.mod h1:bzdlFUbmjuJjaIGTizTBfz9Srk/HsPRLBVIfS03oe9A=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de h1:ikNHVSjEfnvz6sxdSPCaPt572qowuyMDMJLLm3Db3ig=
 golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=

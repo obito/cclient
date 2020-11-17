@@ -10,7 +10,6 @@ import (
 )
 
 func NewClient(clientHello utls.ClientHelloID, enableJar bool, proxyUrl ...string) (http.Client, error) {
-
 	if len(proxyUrl) > 0 && len(proxyUrl) > 0 {
 		dialer, err := newConnectDialer(proxyUrl[0])
 		if err != nil {
@@ -32,22 +31,22 @@ func NewClient(clientHello utls.ClientHelloID, enableJar bool, proxyUrl ...strin
 		return http.Client{
 			Transport: newRoundTripper(clientHello, dialer),
 		}, nil
-	} else {
+	}
 
-		if enableJar {
-			jar, err := cookiejar.New(nil)
-			if err != nil {
-				return http.Client{}, err
-			}
-
-			return http.Client{
-				Transport: newRoundTripper(clientHello, proxy.Direct),
-				Jar:       jar,
-			}, nil
+	if enableJar {
+		jar, err := cookiejar.New(nil)
+		if err != nil {
+			return http.Client{}, err
 		}
 
 		return http.Client{
 			Transport: newRoundTripper(clientHello, proxy.Direct),
+			Jar:       jar,
 		}, nil
 	}
+
+	return http.Client{
+		Transport: newRoundTripper(clientHello, proxy.Direct),
+	}, nil
+
 }
